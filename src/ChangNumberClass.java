@@ -134,6 +134,6 @@ public class ChangNumberClass {
 		
 		return number;
 	}
-	}
-
 }
+
+

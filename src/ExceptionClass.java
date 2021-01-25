@@ -100,6 +100,6 @@ public class ExceptionClass {
 		}
 		System.out.println("callClass end");
 	}
-	}
-
 }
+
+
