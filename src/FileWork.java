@@ -16,8 +16,11 @@ public class FileWork {
 		    3. 데이터 읽기
 		 */
 		File myFile = new File("d:\\tmp\\newfile2.txt"); // 파일 포인터 생성
-		String info[] = {"홍길이", "5살", "조선"}; // 파일에 저장할 내용
-		
+		String info[][] = {    // 파일에 저장할 내용
+			{"홍길이", "5살", "조선"}, 
+			{"춘길이", "6살", "고구려"}, 
+			{"섬길이", "7살", "백제"}	
+		};
 		fileMake(myFile); // 파일 생성 함수 호출
 		
 		fileSave(myFile, info); // 파일 저장 함수 호출
@@ -40,12 +43,15 @@ public class FileWork {
 	}
 	
 	// 파일 저장
-	static void fileSave(File myFile, String[] info) {
+	static void fileSave(File myFile, String[][] info) {
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(myFile)));
 			
 			for (int i = 0; i < info.length; i++) {
-				pw.println(info[i]);
+				for (int j = 0; j < info[i].length; j++) {
+					pw.print(info[i][j] + " ");
+				}
+				pw.print("\n");
 			}
 			
 			pw.close();
