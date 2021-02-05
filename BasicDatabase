@@ -1,9 +1,10 @@
+
 select * from employees;
 --한줄주석문
 SELECT * FROM EMPLOYEES;
 
 /*
-범위 주석문
+범위주석문
 */
 
 -- table 생성
@@ -11,56 +12,57 @@ SELECT * FROM EMPLOYEES;
 CREATE TABLE 테이블명(
     컬럼명1 자료형,
     컬럼명2 자료형,
-        :
-        :
+          :
+          :
 );
 */
 
 -- 자료형
 /*
-        Java           DB 
-        String         VARCHAR2, CHAR, LONG 
-        int            INTEGER, NUMBER 
-        double         NUMBER 
-        Date           DATE 
+        Java          DB
+        String       VARCHAR2, CHAR, LONG(용량이크다- 잘쓰지 않음)
+        int          INTEGER, NUMBER
+        double       NUMBER
+        Date         DATE
 */
 
 -- 문자열
 -- CHAR
-CREATE TABLE TB_CHAR(
+CREATE TABLE TB_CHAR(   -- 테이블 생성
     COL1 CHAR(10 BYTE),
-    COL2 CHAR(10 CHAR),         
+    COL2 CHAR(10 CHAR),
     COL3 CHAR(10)
 );
 
 /*
-    INSERT INTO 테이블명(컬럼명, 컬럼명 ...)
-    VALUES( 값, 값, 값 ... )
+    INSERT INTO 테이브명(컬럼명, 컬럼명, 컬럼명 ...)
+    VALUES( 값, 값, 값 ...)
 */
 
-INSERT INTO TB_CHAR(COL1, COL2, COL3)
-VALUES('ABC', 'ABC', 'ABC');    -- 영문자 1문자의 크기 1 BYTE
+INSERT INTO TB_CHAR(COL1, COL2, COL3)  -- 테이블의 Col에 각각 값을 insert 해준다.
+VALUES ('ABC', 'ABC', 'ABC'); -- 영문자 1문자의 크기 1 BYTE
 
-SELECT * FROM tb_char;
-
-INSERT INTO TB_CHAR(COL1, COL2, COL3)
-VALUES('가', '나', '다');         -- 한글의 한문자 3 BYTE 
+SELECT * FROM tb_char; // tb_char 테이블을 보여준다.
 
 INSERT INTO TB_CHAR(COL1, COL2, COL3)
-VALUES('가나', '가나', '가나');
+VALUES ('가', '나', '다'); --  한글의 한문자 3BYTE 나 => 11111 11113 = 12
 
 INSERT INTO TB_CHAR(COL1, COL2, COL3)
-VALUES('가나다', '가나다', '가나다');
+VALUES ('가나', '가나', '가나');  
 
-SELECT COL1, COL2, COL3, LENGTHB(COL1), LENGTHB(COL2), LENGTHB(COL3)
+INSERT INTO TB_CHAR(COL1, COL2, COL3)
+VALUES ('가나다', '가나다', '가나다');
+
+SELECT COL1, COL2, COL3, LENGTHB(COL1),LENGTHB(COL2),LENGTHB(COL3) 
 FROM tb_char;
 
 /*
-    CHAR : 10 BYTE   11111 11111
-    가(3BYTE) + 9  = 12
+    CHAR : 10 BYTE 11111 11111
+    가(3BYTE) + 9 = 12
     가나(6BYTE) + 8 = 14
     가나다(9BYTE) + 7 = 16
 */
+
 
 -- VARCHAR2
 CREATE TABLE TB_VARCHAR(
@@ -75,15 +77,15 @@ VALUES('ABC', 'ABC', 'ABC');
 INSERT INTO TB_VARCHAR(COL1, COL2, COL3)
 VALUES('가나다', '가나다', '가나다');
 
-SELECT COL1, COL2, COL3, lengthb(col1), lengthb(col2), lengthb(col3)
+SELECT COL1, COL2, COL3, LENGTHB(COL1),LENGTHB(COL2),LENGTHB(COL3) -- LENGTHB -> BYTE 단위 길이 값
 FROM tb_varchar;
 
 -- LONG
 -- 최대 2GB까지 저장가능
 -- TABLE당 1개의 컬럼만 사용가능
+
 CREATE TABLE TB_LONG(
     COL LONG
---    COL1 LONG
 );
 
 INSERT INTO tb_long(COL)
@@ -99,6 +101,7 @@ CREATE TABLE TB_INTEGER(
     COL2 INTEGER
 );
 
+
 INSERT INTO tb_integer(COL1, COL2)
 VALUES(123, 456);
 
@@ -111,7 +114,7 @@ SELECT * FROM tb_integer;
 CREATE TABLE TB_NUMBER(
     COL1 NUMBER,
     COL2 NUMBER(5),
-    COL3 NUMBER(5, 2),
+    COL3 NUMBER(5, 2), -- 5는 자리수, 2는 소수점 자리수
     COL4 NUMBER(*, 2)
 );
 
@@ -120,7 +123,6 @@ VALUES(1234.5678, 12345.12, 123.456, 1234.56789);
 
 SELECT * FROM tb_number;
 
-
 -- 날짜 DATE
 -- 연도, 월, 일, 시, 분, 초
 CREATE TABLE TB_DATE(
@@ -128,24 +130,24 @@ CREATE TABLE TB_DATE(
     COL2 DATE
 );
 
--- SYSDATE
+-- SYSDATE : 현재 년 월 일 시 분 초 를 얻어올 수 있다
 INSERT INTO tb_date(COL1, COL2)
-VALUES(SYSDATE, SYSDATE - 1);
+VALUES(SYSDATE, SYSDATE -1); -- (오늘 날짜, 오늘날짜 - 1 )
 
 SELECT * FROM tb_date;
 
-INSERT INTO tb_date(COL1, COL2)     
-VALUES(SYSDATE, TO_DATE('2021-02-05 05:23:21', 'YYYY-MM-DD HH:MI:SS') );  -- TO_DATE( '문자열', '형식' )
+INSERT INTO tb_date(COL1, COL2) -- TO_DATE('문자열', '형식')
+VALUES(SYSDATE, TO_DATE('2021-02-05 05:23:49', 'YYYY-MM-DD HH:MI:SS') );
 
 /*
-    VARCHAR2
-    NUMBER
-    DATE
+    VARCHAR2 문자 -> 가장 많이 사용한다.
+    NUMBER   숫자 -> 가장 많이 사용한다.
+    DATE     문자 -> 가장 많이 사용한다.
 */
 
-DROP TABLE TB_CHAR;
-DROP TABLE TB_VARCHAR;
-DROP TABLE TB_LONG;
-DROP TABLE TB_NUMBER;
-DROP TABLE TB_INTEGER;
-DROP TABLE TB_DATE;
+DROP TABLE tb_CHAR;
+DROP TABLE tb_VARCHAR;
+DROP TABLE tb_LONG;
+DROP TABLE tb_NUMBER;
+DROP TABLE tb_INTEGER;
+DROP TABLE tb_DATE;
